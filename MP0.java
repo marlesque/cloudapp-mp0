@@ -4,7 +4,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
-public class MP1 {
+public class MP0 {
     Random generator;
     String userName;
     String inputFileName;
@@ -44,7 +44,7 @@ public class MP1 {
         return ret;
     }
 
-    public MP1(String userName, String inputFileName) {
+    public MP0(String userName, String inputFileName) {
         this.userName = userName;
         this.inputFileName = inputFileName;
     }
@@ -59,12 +59,12 @@ public class MP1 {
 
     public static void main(String[] args) throws Exception {
         if (args.length < 1){
-            System.out.println("MP1 <User ID>");
+            System.out.println("MP0 <User ID>");
         }
         else {
             String userName = args[0];
             String inputFileName = "./input.txt";
-            MP1 mp = new MP1(userName, inputFileName);
+            MP0 mp = new MP0(userName, inputFileName);
             String[] topItems = mp.process();
             for (String item: topItems){
                 System.out.println(item);
