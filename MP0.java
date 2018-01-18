@@ -51,8 +51,65 @@ public class MP0 {
 
     public String[] process() throws Exception {
         String[] ret = new String[20];
+    List<String> sampleFile = Files.readAllLines(Paths.get(this.inputFileName));
+        ArrayList<String> sample= new ArrayList<String>();
+        for (int index: mp.getIndexes()){
+        	sample.add(sampleFile.get(index));
+        }
+        StringTokenizer ret1= new StringTokenizer(String.join("", sample), delimiter);
+        ArrayList<String> ret2= new ArrayList<String>();
+        ArrayList<String> ret3= new ArrayList<String>();
+        while (ret1.hasMoreTokens()) {
+        	String str= ret1.nextToken().toLowerCase();
+        	int i=0;
+        	Boolean containingAny= false;
+        	while ((i < stopWordArray.length) && (!containingAny)) {
+        		containingAny= str.contains(stopWordArray[i]) || containingAny;
+        		i++;
+        		}
+        	if (!containingAny) {
+        		ret2.add(str);
+        	}
+        	}
+        List<Object> list = ret2.stream().distinct().collect(Collectors.toList());
+        HashMap<String, Integer> map = new HashMap<String, Integer>();
+
+        for (Object s: list) {
+        	int count = Collections.frequency(ret2, s);
+        	map.put((String) s, count);
+        }
+        ArrayList<Integer> sortedValues= new ArrayList<Integer>(map.values());
+        Collections.sort(sortedValues, Collections.reverseOrder());
+        
        
-        //TODO
+        HashMap<Integer, String> map2= sortByValues(map);
+        Set set2= map2.entrySet();
+        Iterator iterator2= set2.iterator();
+        int j= 0;
+        while(iterator2.hasNext() && j < 20) {
+            Map.Entry me2 = (Map.Entry)iterator2.next();
+            ret[j]= (String) me2.getKey();
+            j++;
+       }
+        return ret;
+    }
+	  	@SuppressWarnings({ "rawtypes", "unchecked" })
+		private static HashMap sortByValues(HashMap map) { 
+	       List list = new LinkedList(map.entrySet());
+	       // Defined Custom Comparator here
+	       Collections.sort(list, new Comparator() {
+	            public int compare(Object o2, Object o1) {
+	               return ((Comparable) ((Map.Entry) (o1)).getValue())
+	                  .compareTo(((Map.Entry) (o2)).getValue());
+	            }
+	       });
+	       HashMap sortedHashMap = new LinkedHashMap();
+	       for (Iterator it = list.iterator(); it.hasNext();) {
+	              Map.Entry entry = (Map.Entry) it.next();
+	              sortedHashMap.put(entry.getKey(), entry.getValue());
+	       } 
+	       return sortedHashMap;
+	  }
 
         return ret;
     }
