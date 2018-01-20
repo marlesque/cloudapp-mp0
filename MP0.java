@@ -93,26 +93,24 @@ public class MP0 {
        }
         return ret;
     }
-	  	@SuppressWarnings({ "rawtypes", "unchecked" })
-		private static HashMap sortByValues(HashMap map) { 
-	       List list = new LinkedList(map.entrySet());
-	       // Defined Custom Comparator here
-	       Collections.sort(list, new Comparator() {
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	private static HashMap sortByValues(HashMap map) { 
+	List list = new LinkedList(map.entrySet());
+	// Defined Custom Comparator here
+	Collections.sort(list, new Comparator() {
 	            public int compare(Object o2, Object o1) {
 	               return ((Comparable) ((Map.Entry) (o1)).getValue())
 	                  .compareTo(((Map.Entry) (o2)).getValue());
 	            }
 	       });
-	       HashMap sortedHashMap = new LinkedHashMap();
-	       for (Iterator it = list.iterator(); it.hasNext();) {
-	              Map.Entry entry = (Map.Entry) it.next();
-	              sortedHashMap.put(entry.getKey(), entry.getValue());
-	       } 
-	       return sortedHashMap;
+	 HashMap sortedHashMap = new LinkedHashMap();
+	 for (Iterator it = list.iterator(); it.hasNext();) {
+	     Map.Entry entry = (Map.Entry) it.next();
+	     sortedHashMap.put(entry.getKey(), entry.getValue());
+	     } 
+	  return sortedHashMap;
 	  }
-
-        return ret;
-    }
+    
 
     public static void main(String[] args) throws Exception {
         if (args.length < 1){
