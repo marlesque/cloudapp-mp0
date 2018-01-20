@@ -53,7 +53,7 @@ public class MP0 {
         String[] ret = new String[20];
     List<String> sampleFile = Files.readAllLines(Paths.get(this.inputFileName));
         ArrayList<String> sample= new ArrayList<String>();
-        for (int index: mp.getIndexes()){
+        for (int index: this.getIndexes()){
         	sample.add(sampleFile.get(index));
         }
         StringTokenizer ret1= new StringTokenizer(String.join("", sample), delimiter);
